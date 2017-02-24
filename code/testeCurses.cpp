@@ -16,7 +16,8 @@ void telaInicial(){
 //	raw();
 	keypad(stdscr, TRUE);
 	noecho(); /* tecla pressionada nao aparece */
-	printw("Ssssssssnake Game\n");
+	printw("Ssssssssnake Game \n--- INSTRUCOES DE JOGO ---\n a - esquerda\n d - direita\n w - para cima\n s - para baixo \n x - Sair\n APERTE ENTER PARA INICIAR!");
+	
 	refresh();
 
 }
@@ -55,7 +56,8 @@ void input()
 {
     while(!gameOver)
     {
-        switch(getch())/* captura a tecla pressionada */
+		char tecla = getch();
+        switch(tecla)/* captura a tecla pressionada */
         {
             case 'a': 
                 dir = LEFT;
@@ -78,10 +80,16 @@ void input()
                 refresh();
                 break;
             case 'x':
-                printw(" sair 'x'\n");
+                printw(" tem certeza que quer sair? \n");
                 refresh(); 
                 gameOver = true;
                 break;
+			default:
+				printw("tecla pressionada: ");
+				attron(A_BOLD);
+				printw("%c", tecla);
+				attroff(A_BOLD);
+				break;
 		}
       }
 }
