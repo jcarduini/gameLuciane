@@ -3,18 +3,26 @@
 
 bool gameOver;
 
+const int width = 20;
+const int height = 20;
+
+int snakeX, snakeY, fruitX, fruitY, score;
+
+enum eDirection {STOP=0, LEFT, RIGHT, UP, DOWN};
+eDirection dir;
 
 void setup(){
 	gameOver = false;
 	initscr(); /* inicia modo curses */
+//	raw();
+	keypad(stdscr, TRUE);
+	noecho(); /* tecla pressionada nao aparece */
 	printw("Ssssssssnake Game\n");
 	refresh();
 }
 
 void draw(){
 
-//	WINDOW * win;
-//	win = newwin(20,20,0,0);
 	switch (getch()){
 		case 'a':
 			std::cout <<"std::cout command\n";
@@ -23,15 +31,60 @@ void draw(){
 		case 'd':
 			std::cout << "UP\n";
 			break;
+		case 'w':
+			std::cout <<"std::cout command\n";
+			printw("w\n");
+			break;
+		case 's':
+			std::cout << "DOWN\n";
+			break;
 		}
+
+	}
+
+void input()
+{
+    while(true)
+    {
+        switch(getch())/* captura a tecla pressionada */
+        {
+            case 'a': 
+                dir = LEFT;
+                printw(" esquerda\n");
+                refresh();
+                break;
+            case 'd': 
+                dir = RIGHT;
+                printw(" direita\n");
+                refresh();
+                break;
+            case 's': 
+                dir = DOWN;
+                printw(" baixo\n");
+                refresh();
+                break;
+            case 'w': 
+                dir = UP;
+                printw(" cima\n");
+                refresh();
+                break;
+            case 'x':
+                printw(" sair 'x'\n");
+                refresh(); 
+                gameOver = true;
+                break;
+		}
+      }
 }
+
+
 
 int main(){
 	setup();
 	while(!gameOver)
 	{
 		draw();
-	//	input();
+		input();
 	//	logic();
 	}
 	endwin();
