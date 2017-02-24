@@ -11,19 +11,28 @@ int snakeX, snakeY, fruitX, fruitY, score;
 enum eDirection {STOP=0, LEFT, RIGHT, UP, DOWN};
 eDirection dir;
 
-void setup(){
-	gameOver = false;
+void telaInicial(){
 	initscr(); /* inicia modo curses */
 //	raw();
 	keypad(stdscr, TRUE);
 	noecho(); /* tecla pressionada nao aparece */
 	printw("Ssssssssnake Game\n");
 	refresh();
+
+}
+
+
+void setup(){
+	gameOver = false;
+
 }
 
 void draw(){
 
 	switch (getch()){
+		case KEY_F(2):
+			printw("F1\n");
+			break;
 		case 'a':
 			std::cout <<"std::cout command\n";
 			printw("a\n");
@@ -44,7 +53,7 @@ void draw(){
 
 void input()
 {
-    while(true)
+    while(!gameOver)
     {
         switch(getch())/* captura a tecla pressionada */
         {
@@ -77,9 +86,8 @@ void input()
       }
 }
 
-
-
 int main(){
+	telaInicial();
 	setup();
 	while(!gameOver)
 	{
